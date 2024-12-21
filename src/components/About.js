@@ -4,9 +4,8 @@ export default function About() {
   'React.js',
   'Next.js',
   'Tailwind CSS',
-  'Node.js',
   'Git',
-  // Add more skills
+  'Python',
  ];
 
  return (
@@ -15,9 +14,16 @@ export default function About() {
     <h2 className="text-3xl font-bold text-gray-800 mb-8">About Me</h2>
     <div className="space-y-6 text-gray-600">
      <p>
-      Hello! I'm a passionate frontend developer with a strong foundation in
-      modern web technologies. I enjoy creating user-friendly interfaces and
-      bringing designs to life through code.
+      Hello! I’m Rigel Ray O. Cabaya, a Computer Science student from CS3A. 💻
+      I’m passionate about exploring the world of technology, from learning
+      algorithms 🧠 to building innovative projects that solve real problems. 🚀
+     </p>
+
+     <p>
+      Whether I’m collaborating with a people🤝 or tackling coding challenges
+      🖥️, I enjoy turning ideas into practical solutions. As someone who
+      believes in constant learning 📚, I aim to grow with every project I take
+      on and contribute meaningfully to the tech world. 🌐
      </p>
 
      <div>
@@ -40,9 +46,11 @@ export default function About() {
       <h3 className="text-xl font-semibold text-gray-800 mb-4">Education</h3>
       <div className="space-y-4">
        <div>
-        <h4 className="text-lg text-green-600">Your University</h4>
+        <h4 className="text-lg text-green-600">
+         University of Science and Technology
+        </h4>
         <p className="text-gray-700">Bachelor's in Computer Science</p>
-        <p className="text-gray-500">2019 - 2023</p>
+        <p className="text-gray-500">2022 - Present</p>
        </div>
       </div>
      </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import TypeWriter from './TypeWriter';
 
 export default function Hero() {
  return (
@@ -8,10 +9,10 @@ export default function Hero() {
    id="home"
    className="min-h-screen flex items-center justify-center py-16"
   >
-   <div className="grid md:grid-cols-2 gap-8 items-center">
-    <div className="space-y-6">
+   <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8 items-center">
+    <div className="space-y-6 pl-10">
      <h1 className="text-4xl md:text-6xl font-bold text-gray-800">
-      Hi, I'm <span className="text-green-500">Your Name</span>
+      <TypeWriter />
      </h1>
      <p className="text-xl text-gray-600">
       Frontend Developer passionate about creating beautiful and functional web
@@ -35,7 +36,7 @@ export default function Hero() {
     <div className="relative">
      <div className="w-80 h-80 mx-auto rounded-full overflow-hidden border-4 border-green-500 relative">
       <Image
-       src="/your-profile-photo.jpg"
+       src="/images/Profile.png"
        alt="Profile"
        fill
        className="object-cover"
