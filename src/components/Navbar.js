@@ -5,7 +5,7 @@ export default function Navbar() {
  const [isOpen, setIsOpen] = useState(false);
 
  return (
-  <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-sm border-b border-green-100">
+  <nav className="fixed w-full z-50 bg-CustomWhite/50 backdrop-blur-sm border-b border-green-100">
    <div className="container mx-auto px-4">
     <div className="flex items-center justify-between h-16">
      <span className="text-gray-800 text-xl font-bold">Portfolio</span>
