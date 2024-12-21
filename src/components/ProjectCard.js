@@ -5,10 +5,10 @@ export default function ProjectCard({
  description,
  image,
  technologies,
- githubLink,
+ ProjectLink,
 }) {
  return (
-  <div className="w-full bg-white rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl border border-green-100">
+  <div className="w-full bg-white rounded-lg overflow-hidden transform transition-all duration-300 shadow-lg hover:scale-[1.02] active:scale-[0.98] border border-green-100 cursor-pointer">
    <div className="relative aspect-video">
     <Image src={image} alt={title} fill className="object-cover" />
    </div>
@@ -31,17 +31,6 @@ export default function ProjectCard({
        </span>
       ))}
      </div>
-    </div>
-
-    <div className="flex space-x-4">
-     <a
-      href={githubLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
-     >
-      GitHub
-     </a>
     </div>
    </div>
   </div>
