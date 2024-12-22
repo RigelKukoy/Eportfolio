@@ -10,7 +10,7 @@ export default function Navbar() {
     {/* Navigation container */}
     <div className="flex items-center justify-between h-16">
      {/* Logo */}
-     <span className="text-gray-800 text-xl font-bold">PortfYolio</span>
+     <span className="text-gray-800 text-xl font-bold">Portfolio</span>
 
      {/* Desktop navigation links */}
      <div className="hidden md:flex space-x-8">
