@@ -2,17 +2,18 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Form field configuration
+// Input fields configuration
 const inputFields = [
  { name: 'name', type: 'text', label: 'Name' },
  { name: 'email', type: 'email', label: 'Email' },
 ];
 
 export default function ContactForm() {
+ // Form state
  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
  const [submitted, setSubmitted] = useState(false);
 
- // Animation configurations
+ // Animation variants
  const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -24,7 +25,7 @@ export default function ContactForm() {
   transition: { duration: 0.2 },
  };
 
- // Form handlers
+ // Form submission handler
  const handleSubmit = async (e) => {
   e.preventDefault();
   try {
@@ -44,6 +45,7 @@ export default function ContactForm() {
   }
  };
 
+ // Input change handler
  const handleChange = (e) => {
   setFormData({ ...formData, [e.target.name]: e.target.value });
  };
@@ -54,6 +56,7 @@ export default function ContactForm() {
    className="space-y-6 max-w-2xl mx-auto"
    onSubmit={handleSubmit}
   >
+   {/* Success message */}
    {submitted && (
     <motion.div
      initial={{ opacity: 0 }}
@@ -64,6 +67,7 @@ export default function ContactForm() {
     </motion.div>
    )}
 
+   {/* Input fields */}
    {inputFields.map(({ name, type, label }) => (
     <motion.div key={name} {...hoverScale}>
      <label className="block text-sm font-medium text-gray-700">{label}</label>
@@ -78,6 +82,7 @@ export default function ContactForm() {
     </motion.div>
    ))}
 
+   {/* Message textarea */}
    <motion.div {...hoverScale}>
     <label className="block text-sm font-medium text-gray-700">Message</label>
     <textarea
@@ -90,6 +95,7 @@ export default function ContactForm() {
     />
    </motion.div>
 
+   {/* Submit button */}
    <motion.button
     type="submit"
     whileTap={{ scale: 0.98 }}
