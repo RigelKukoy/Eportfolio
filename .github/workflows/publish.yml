@@ -21,37 +21,31 @@ jobs:
    - name: Checkout 🛎️
      uses: actions/checkout@v4
 
-   - name: Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧
-     uses: ./.github/workflows/setup-node
-
-   - name: Setup Pages ⚙️
-     uses: actions/configure-pages@v4
+   - name: Setup Node.js ⚙️
+     uses: actions/setup-node@v4
      with:
-      static_site_generator: next
+      node-version: '18'
+
+   - name: Install dependencies 🔧
+     run: |
+      rm -rf node_modules package-lock.json
+      npm install
 
    - name: Build with Next.js 🏗️
-     run: |
-      echo "Starting build..."
-      npx next build
-      echo "Build completed"
-      ls -la
-      echo "Checking out directory..."
-      ls -la out || echo "out directory not found"
+     run: npm run build
 
    - name: Upload artifact 📡
      uses: actions/upload-pages-artifact@v3
      with:
-      path: ./out
+      path: out
 
  deploy:
   environment:
    name: github-pages
    url: ${{ steps.deployment.outputs.page_url }}
-
   runs-on: ubuntu-latest
   needs: build
-
   steps:
-   - name: Publish to GitHub Pages 🚀
+   - name: Deploy to GitHub Pages 🚀
      id: deployment
      uses: actions/deploy-pages@v4
