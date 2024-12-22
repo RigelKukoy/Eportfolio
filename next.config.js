@@ -5,7 +5,6 @@ const nextConfig = {
   unoptimized: true,
  },
  basePath: '/Eportfolio',
- distDir: 'out',
 };
 
 module.exports = nextConfig;
