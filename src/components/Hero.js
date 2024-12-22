@@ -7,9 +7,23 @@ export default function Hero() {
  return (
   <section
    id="home"
-   className="min-h-screen flex items-center justify-center py-16"
+   className="min-h-screen flex items-center justify-center py-16 relative overflow-hidden"
   >
-   <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8 items-center">
+   {/* Background Design Elements */}
+   <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute top-40 left-10 w-72 h-72 bg-green-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+    <div className="absolute bottom-40 right-10 w-72 h-72 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+
+    {/* Grid Pattern */}
+    <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+
+    {/* Floating Elements */}
+    <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-green-400 rounded-full animate-float"></div>
+    <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-green-300 rounded-full animate-float animation-delay-2000"></div>
+    <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-green-200 rounded-full animate-float animation-delay-4000"></div>
+   </div>
+
+   <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8 items-center relative">
     <div className="space-y-6 pl-10">
      <h1 className="text-4xl md:text-6xl font-bold text-gray-800">
       <TypeWriter />

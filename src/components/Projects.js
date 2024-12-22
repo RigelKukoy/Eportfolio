@@ -6,6 +6,7 @@ import { Modal } from 'flowbite-react';
 import Image from 'next/image';
 
 export default function Projects() {
+ // Project data array containing all project information
  const projects = [
   {
    title:
@@ -14,8 +15,7 @@ export default function Projects() {
     'This study focuses on enhancing the Square Root Counting Sort (SRCS) algorithm by integrating parallel processing techniques using the Message Passing Interface (MPI). The improved algorithm, Parallel SRCS, leverages multiple cores in modern computing systems to address the limitations of sequential SRCS in handling large datasets. Experimental results demonstrated that Parallel SRCS significantly outperforms traditional SRCS, Radix Sort, and Introspective Sort in both fixed-random and reverse-sorted datasets. On average, Parallel SRCS achieved performance improvements of 102.91% in fixed-random datasets and 124.22% in reverse-sorted datasets compared to SRCS. These findings highlight the efficiency and scalability of Parallel SRCS, making it highly suitable for big data applications.',
    image: '/images/MPI.png',
    technologies: ['C++', 'MPI', 'Parrallel processing', 'Sorting algorithms'],
-   ProjectLink:
-    'https://drive.google.com/file/d/11ZOY1lcs8r6FsCpapZgly84vlF_MAJcc/view?usp=sharing',
+   ProjectLink: 'https://github.com/RigelKukoy/OptimizedSRCS',
   },
   {
    title: 'Sherlock vs Moriarty: goes to CDO Visual Novel',
@@ -67,54 +67,76 @@ export default function Projects() {
     </div>
    </section>
 
+   {/* Project details modal */}
    <Modal
-    className="backdrop-blur-md bg-black bg-opacity-75"
+    className="backdrop-blur-md bg-black bg-opacity-75 !p-0 fixed inset-0"
     dismissible
     show={openModal}
     onClose={() => setOpenModal(false)}
     size="4xl"
     position="center"
    >
-    <Modal.Header className="border-b border-gray-200">
-     <h3 className="text-lg font-semibold p-2">{selectedProject?.title}</h3>
-    </Modal.Header>
-    <Modal.Body className="max-h-[calc(100vh-200px)] overflow-y-auto">
-     <div className="space-y-4">
-      <div className="relative aspect-video w-full max-h-[50vh]">
-       {selectedProject?.image && (
-        <Image
-         src={selectedProject.image}
-         alt={selectedProject.title}
-         fill
-         className="object-contain rounded-lg"
-        />
-       )}
-      </div>
-      <p className="text-gray-600">{selectedProject?.description}</p>
-      <div className="flex flex-wrap gap-2">
-       {selectedProject?.technologies.map((tech, index) => (
-        <span
-         key={index}
-         className="px-3 py-1 text-sm bg-green-50 text-gray-700 rounded-full"
+    <div className="fixed inset-0 overflow-y-auto">
+     <div className="flex min-h-full items-center justify-center p-2 sm:p-4">
+      <div className="w-full max-w-4xl bg-white rounded-lg flex flex-col max-h-[calc(100vh-1rem)]">
+       <Modal.Header className="border-b border-gray-200 p-3 sm:p-4 flex-shrink-0">
+        <h3 className="text-base sm:text-lg font-semibold break-words">
+         {selectedProject?.title}
+        </h3>
+       </Modal.Header>
+
+       <Modal.Body className="p-3 sm:p-4 overflow-y-auto">
+        <div className="space-y-3 sm:space-y-4">
+         <div className="relative w-full aspect-[16/10] sm:aspect-video bg-gray-100 rounded-lg">
+          {selectedProject?.image && (
+           <Image
+            src={selectedProject.image}
+            alt={selectedProject.title}
+            fill
+            className="object-contain rounded-lg"
+            priority
+            sizes="(max-width: 768px) 100vw, 800px"
+           />
+          )}
+         </div>
+
+         <div className="prose prose-sm sm:prose-base max-w-none">
+          <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">
+           {selectedProject?.description}
+          </p>
+         </div>
+
+         <div>
+          <h4 className="text-sm font-semibold text-gray-700 mb-2">
+           Technologies Used:
+          </h4>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+           {selectedProject?.technologies.map((tech, index) => (
+            <span
+             key={index}
+             className="px-2.5 py-1 text-xs bg-green-50 text-gray-700 rounded-full"
+            >
+             {tech}
+            </span>
+           ))}
+          </div>
+         </div>
+        </div>
+       </Modal.Body>
+
+       <Modal.Footer className="border-t border-gray-200 p-3 sm:p-4 flex-shrink-0">
+        <a
+         href={selectedProject?.ProjectLink}
+         target="_blank"
+         rel="noopener noreferrer"
+         className="block w-full px-3 sm:px-4 py-2 bg-green-500 text-white text-center rounded hover:bg-green-600 transition-colors text-sm sm:text-base"
         >
-         {tech}
-        </span>
-       ))}
+         View Project
+        </a>
+       </Modal.Footer>
       </div>
      </div>
-    </Modal.Body>
-    <Modal.Footer className="border-t border-gray-200">
-     <div className="flex space-x-4">
-      <a
-       href={selectedProject?.ProjectLink}
-       target="_blank"
-       rel="noopener noreferrer"
-       className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
-      >
-       Project Link
-      </a>
-     </div>
-    </Modal.Footer>
+    </div>
    </Modal>
   </>
  );

@@ -14,16 +14,19 @@ export default function About() {
     <h2 className="text-3xl font-bold text-gray-800 mb-8">About Me</h2>
     <div className="space-y-6 text-gray-600">
      <p>
-      Hello! I’m Rigel Ray O. Cabaya, a Computer Science student from CS3A. 💻
-      I’m passionate about exploring the world of technology, from learning
+      Hello! I&apos;m Rigel Ray O. Cabaya, a Computer Science student from the
+      University of Science and Technology of the Philippines.💻 I&apos;m
+      passionate about exploring the world of technology, from learning
       algorithms 🧠 to building innovative projects that solve real problems. 🚀
      </p>
 
      <p>
-      Whether I’m collaborating with a people🤝 or tackling coding challenges
-      🖥️, I enjoy turning ideas into practical solutions. As someone who
-      believes in constant learning 📚, I aim to grow with every project I take
-      on and contribute meaningfully to the tech world. 🌐
+      I'm particularly interested in web development, where I enjoy creating
+      beautiful and functional web experiences. Whether I&apos;m collaborating
+      with a people🤝 or tackling coding challenges 🖥️, I enjoy turning ideas
+      into practical solutions. As someone who believes in constant learning 📚,
+      I aim to grow with every project I take on and contribute meaningfully to
+      the tech world. 🌐
      </p>
 
      <div>
@@ -47,9 +50,9 @@ export default function About() {
       <div className="space-y-4">
        <div>
         <h4 className="text-lg text-green-600">
-         University of Science and Technology
+         University of Science and Technology if the Philippines
         </h4>
-        <p className="text-gray-700">Bachelor's in Computer Science</p>
+        <p className="text-gray-700">Bachelor&apos;s in Computer Science</p>
         <p className="text-gray-500">2022 - Present</p>
        </div>
       </div>
