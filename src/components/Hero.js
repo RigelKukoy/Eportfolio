@@ -15,7 +15,7 @@ export default function Hero() {
     <div className="absolute bottom-40 right-10 w-72 h-72 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
 
     {/* Grid Pattern */}
-    <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+    <div className="absolute inset-0 opacity-90 bg-[url('/public/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0.1))]"></div>
 
     {/* Floating Elements */}
     <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-green-400 rounded-full animate-float"></div>

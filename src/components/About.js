@@ -1,3 +1,5 @@
+import { FaGithub, FaFacebook } from 'react-icons/fa';
+
 export default function About() {
  const skills = [
   'JavaScript (ES6+)',
@@ -9,8 +11,8 @@ export default function About() {
  ];
 
  return (
-  <section id="about" className=" w-full py-20 px-10 bg-MintGreen">
-   <div className="max-w-4xl mx-auto ">
+  <section id="about" className="w-full py-10 px-10 bg-MintGreen">
+   <div className="max-w-4xl mx-auto">
     <h2 className="text-3xl font-bold text-gray-800 mb-8">About Me</h2>
     <div className="space-y-6 text-gray-600">
      <p>
@@ -45,17 +47,27 @@ export default function About() {
       </div>
      </div>
 
-     <div>
-      <h3 className="text-xl font-semibold text-gray-800 mb-4">Education</h3>
-      <div className="space-y-4">
-       <div>
-        <h4 className="text-lg text-green-600">
-         University of Science and Technology if the Philippines
-        </h4>
-        <p className="text-gray-700">Bachelor&apos;s in Computer Science</p>
-        <p className="text-gray-500">2022 - Present</p>
-       </div>
-      </div>
+     <div className="flex space-x-4 mt-6 pt-3">
+      <a
+       href="https://github.com/RigelKukoy"
+       target="_blank"
+       rel="noopener noreferrer"
+      >
+       <FaGithub
+        size={32}
+        className="text-gray-800 hover:text-green-500 transition-colors"
+       />
+      </a>
+      <a
+       href="https://www.facebook.com/rigelray.cabaya"
+       target="_blank"
+       rel="noopener noreferrer"
+      >
+       <FaFacebook
+        size={32}
+        className="text-gray-800 hover:text-green-500 transition-colors"
+       />
+      </a>
      </div>
     </div>
    </div>
