@@ -5,31 +5,39 @@ export default function ProjectCard({
  description,
  image,
  technologies,
- ProjectLink,
+ onClick,
 }) {
  return (
-  <div className="w-full bg-white rounded-lg overflow-hidden transform transition-all duration-300 shadow-lg hover:scale-[1.02] active:scale-[0.98] border border-green-100 cursor-pointer">
-   <div className="relative aspect-video">
-    <Image src={image} alt={title} fill className="object-cover" />
-   </div>
+  <div
+   onClick={onClick}
+   className="relative h-[500px] w-full my-4 cursor-pointer group"
+  >
+   {/* Image Container */}
+   <div className="relative w-full h-full rounded-2xl overflow-hidden">
+    <Image
+     src={image}
+     alt={title}
+     fill
+     className="object-cover transition-transform duration-300 group-hover:scale-105"
+    />
 
-   <div className="p-6">
-    <h3 className="text-2xl font-bold text-gray-800 mb-2">{title}</h3>
-    <p className="text-gray-600 mb-4">{description}</p>
+    {/* Overlay with content */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6 flex flex-col justify-end text-white">
+     <h3 className="text-2xl font-bold mb-2">{title}</h3>
+     <p className="text-sm text-gray-200 line-clamp-2 mb-4">{description}</p>
 
-    <div className="mb-4">
-     <h4 className="text-sm font-semibold text-green-600 mb-2">
-      Technologies Used:
-     </h4>
-     <div className="flex flex-wrap gap-2">
-      {technologies.map((tech, index) => (
-       <span
-        key={index}
-        className="px-3 py-1 text-sm bg-green-50 text-gray-700 rounded-full"
-       >
-        {tech}
-       </span>
-      ))}
+     <div>
+      <h4 className="text-sm font-semibold mb-2">Technologies:</h4>
+      <div className="flex flex-wrap gap-2">
+       {technologies.map((tech, index) => (
+        <span
+         key={index}
+         className="px-3 py-1 text-xs bg-white/20 backdrop-blur-sm rounded-full"
+        >
+         {tech}
+        </span>
+       ))}
+      </div>
      </div>
     </div>
    </div>

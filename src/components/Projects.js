@@ -1,11 +1,15 @@
 'use client';
 
 import ProjectCard from './ProjectCard';
+import ProjectModal from './ProjectModal';
 import { useState } from 'react';
-import { Modal } from 'flowbite-react';
-import Image from 'next/image';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function Projects() {
+ const [selectedProject, setSelectedProject] = useState(null);
+
  // Project data array containing all project information
  const projects = [
   {
@@ -42,102 +46,61 @@ export default function Projects() {
   },
  ];
 
- const [openModal, setOpenModal] = useState(false);
- const [selectedProject, setSelectedProject] = useState(null);
-
- const handleProjectClick = (project) => {
-  setSelectedProject(project);
-  setOpenModal(true);
+ const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  vertical: true,
+  verticalSwiping: true,
+  beforeChange: function (currentSlide, nextSlide) {
+   console.log('before change', currentSlide, nextSlide);
+  },
+  afterChange: function (currentSlide) {
+   console.log('after change', currentSlide);
+  },
+  responsive: [
+   {
+    breakpoint: 1024,
+    settings: {
+     slidesToShow: 2,
+    },
+   },
+   {
+    breakpoint: 768,
+    settings: {
+     slidesToShow: 1,
+    },
+   },
+  ],
  };
 
  return (
-  <>
-   <section id="projects" className="py-20">
-    <div className="max-w-6xl mx-auto">
-     <h2 className="text-3xl font-bold text-gray-800 mb-12">
-      Featured Projects
-     </h2>
-     <div className="space-y-20">
+  <section id="projects" className="py-20 bg-gray-50">
+   <div className="max-w-6xl mx-auto px-4">
+    <h2 className="text-3xl font-bold text-gray-800 mb-12">
+     Featured Projects
+    </h2>
+
+    <div className="h-[1000px]">
+     {' '}
+     {/* Fixed height container for slider */}
+     <Slider {...settings}>
       {projects.map((project, index) => (
-       <div key={index} onClick={() => handleProjectClick(project)}>
-        <ProjectCard {...project} />
+       <div key={index} className="px-4">
+        <ProjectCard {...project} onClick={() => setSelectedProject(project)} />
        </div>
       ))}
-     </div>
+     </Slider>
     </div>
-   </section>
+   </div>
 
-   {/* Project details modal */}
-   <Modal
-    className="backdrop-blur-md bg-black bg-opacity-75 !p-0 fixed inset-0"
-    dismissible
-    show={openModal}
-    onClose={() => setOpenModal(false)}
-    size="4xl"
-    position="center"
-   >
-    <div className="fixed inset-0 overflow-y-auto">
-     <div className="flex min-h-full items-center justify-center p-2 sm:p-4">
-      <div className="w-full max-w-4xl bg-white rounded-lg flex flex-col max-h-[calc(100vh-1rem)]">
-       <Modal.Header className="border-b border-gray-200 p-3 sm:p-4 flex-shrink-0">
-        <h3 className="text-base sm:text-lg font-semibold break-words">
-         {selectedProject?.title}
-        </h3>
-       </Modal.Header>
-
-       <Modal.Body className="p-3 sm:p-4 overflow-y-auto">
-        <div className="space-y-3 sm:space-y-4">
-         <div className="relative w-full aspect-[16/10] sm:aspect-video bg-gray-100 rounded-lg">
-          {selectedProject?.image && (
-           <Image
-            src={selectedProject.image}
-            alt={selectedProject.title}
-            fill
-            className="object-contain rounded-lg"
-            priority
-            sizes="(max-width: 768px) 100vw, 800px"
-           />
-          )}
-         </div>
-
-         <div className="prose prose-sm sm:prose-base max-w-none">
-          <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">
-           {selectedProject?.description}
-          </p>
-         </div>
-
-         <div>
-          <h4 className="text-sm font-semibold text-gray-700 mb-2">
-           Technologies Used:
-          </h4>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-           {selectedProject?.technologies.map((tech, index) => (
-            <span
-             key={index}
-             className="px-2.5 py-1 text-xs bg-green-50 text-gray-700 rounded-full"
-            >
-             {tech}
-            </span>
-           ))}
-          </div>
-         </div>
-        </div>
-       </Modal.Body>
-
-       <Modal.Footer className="border-t border-gray-200 p-3 sm:p-4 flex-shrink-0">
-        <a
-         href={selectedProject?.ProjectLink}
-         target="_blank"
-         rel="noopener noreferrer"
-         className="block w-full px-3 sm:px-4 py-2 bg-green-500 text-white text-center rounded hover:bg-green-600 transition-colors text-sm sm:text-base"
-        >
-         View Project
-        </a>
-       </Modal.Footer>
-      </div>
-     </div>
-    </div>
-   </Modal>
-  </>
+   <ProjectModal
+    project={selectedProject}
+    isOpen={!!selectedProject}
+    onClose={() => setSelectedProject(null)}
+   />
+  </section>
  );
 }
