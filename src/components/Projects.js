@@ -21,7 +21,7 @@ export default function Projects() {
    title: 'Sherlock vs Moriarty: goes to CDO Visual Novel',
    description:
     "Sherlock vs. Moriarty is an engaging visual novel where you step into the classic rivalry between the legendary detective Sherlock Holmes and the cunning Professor Moriarty. Built with the Ren'Py Visual Novel Engine, the game blends immersive storytelling, challenging fights, and impactful player choices that shape the outcome of this timeless battle of intellects",
-   image: '/Eportfolio/Eportfolio/public/images/Sherlock.jpg',
+   image: 'public/images/Sherlock.jpg',
    technologies: ['Python', "Ren'Py"],
    ProjectLink: 'https://github.com/RigelKukoy/SherlockVsMoriartyVN',
   },
