@@ -60,3 +60,4 @@ Create a `.env.local` file in the root directory:
 ```env
 NEXT_PUBLIC_FORMSPREE_ENDPOINT=your_formspree_endpoint
 ```
+ 
