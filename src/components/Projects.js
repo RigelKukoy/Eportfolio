@@ -50,19 +50,12 @@ export default function Projects() {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 2,
+  slidesToShow: 3,
   slidesToScroll: 1,
-  vertical: true,
-  verticalSwiping: true,
-  beforeChange: function (currentSlide, nextSlide) {
-   console.log('before change', currentSlide, nextSlide);
-  },
-  afterChange: function (currentSlide) {
-   console.log('after change', currentSlide);
-  },
+  arrows: true,
   responsive: [
    {
-    breakpoint: 1024,
+    breakpoint: 1280,
     settings: {
      slidesToShow: 2,
     },
@@ -78,17 +71,15 @@ export default function Projects() {
 
  return (
   <section id="projects" className="py-20 bg-gray-50">
-   <div className="max-w-6xl mx-auto px-4">
+   <div className="max-w-7xl mx-auto px-4">
     <h2 className="text-3xl font-bold text-gray-800 mb-12">
      Featured Projects
     </h2>
 
-    <div className="h-[1000px]">
-     {' '}
-     {/* Fixed height container for slider */}
+    <div className="relative">
      <Slider {...settings}>
       {projects.map((project, index) => (
-       <div key={index} className="px-4">
+       <div key={index}>
         <ProjectCard {...project} onClick={() => setSelectedProject(project)} />
        </div>
       ))}
