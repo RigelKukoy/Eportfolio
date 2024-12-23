@@ -4,8 +4,35 @@ import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import { useState } from 'react';
 import Slider from 'react-slick';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
+function NextArrow(props) {
+ const { onClick } = props;
+ return (
+  <button
+   onClick={onClick}
+   className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 rounded-full bg-green-500/20 hover:bg-green-500/30 transition-colors"
+   aria-label="Next slide"
+  >
+   <IoIosArrowForward className="w-6 h-6 text-green-600" />
+  </button>
+ );
+}
+
+function PrevArrow(props) {
+ const { onClick } = props;
+ return (
+  <button
+   onClick={onClick}
+   className="absolute -left-12 top-1/2 -translate-y-1/2 p-2 rounded-full bg-green-500/20 hover:bg-green-500/30 transition-colors z-10"
+   aria-label="Previous slide"
+  >
+   <IoIosArrowBack className="w-6 h-6 text-green-600" />
+  </button>
+ );
+}
 
 export default function Projects() {
  const [selectedProject, setSelectedProject] = useState(null);
@@ -53,6 +80,9 @@ export default function Projects() {
   slidesToShow: 3,
   slidesToScroll: 1,
   arrows: true,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
+  rtl: false,
   responsive: [
    {
     breakpoint: 1280,
@@ -64,6 +94,7 @@ export default function Projects() {
     breakpoint: 768,
     settings: {
      slidesToShow: 1,
+     arrows: false,
     },
    },
   ],
@@ -71,7 +102,7 @@ export default function Projects() {
 
  return (
   <section id="projects" className="py-20 bg-gray-50">
-   <div className="max-w-7xl mx-auto px-4">
+   <div className="max-w-7xl mx-auto px-12">
     <h2 className="text-3xl font-bold text-gray-800 mb-12">
      Featured Projects
     </h2>
@@ -79,7 +110,7 @@ export default function Projects() {
     <div className="relative">
      <Slider {...settings}>
       {projects.map((project, index) => (
-       <div key={index}>
+       <div key={index} className="px-2">
         <ProjectCard {...project} onClick={() => setSelectedProject(project)} />
        </div>
       ))}
