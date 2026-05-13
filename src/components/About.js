@@ -1,76 +1,147 @@
-import { FaGithub, FaFacebook } from 'react-icons/fa';
+'use client';
+
+import { FaGithub, FaFacebook, FaLinkedin } from 'react-icons/fa';
+import ScrollReveal from './ScrollReveal';
+import { motion } from 'framer-motion';
 
 export default function About() {
- const skills = [
-  'JavaScript (ES6+)',
-  'React.js',
-  'Next.js',
-  'Tailwind CSS',
-  'Git',
-  'Python',
- ];
+  const skills = [
+    'JavaScript (ES6+)',
+    'React.js',
+    'Next.js',
+    'Tailwind CSS',
+    'Git',
+    'Python',
+  ];
 
- return (
-  <section id="about" className="w-full py-10 px-10 bg-MintGreen">
-   <div className="max-w-4xl mx-auto">
-    <h2 className="text-3xl font-bold text-gray-800 mb-8">About Me</h2>
-    <div className="space-y-6 text-gray-600">
-     <p>
-      Hello! I&apos;m Rigel Ray O. Cabaya, a Computer Science student from the
-      University of Science and Technology of the Philippines.💻 I&apos;m
-      passionate about exploring the world of technology, from learning
-      algorithms 🧠 to building innovative projects that solve real problems. 🚀
-     </p>
+  // Duplicate skills enough times to ensure seamless infinite marquee on ultrawide screens
+  const marqueeSkills = [...skills, ...skills, ...skills, ...skills];
 
-     <p>
-      I'm particularly interested in web development, where I enjoy creating
-      beautiful and functional web experiences. Whether I&apos;m collaborating
-      with a people🤝 or tackling coding challenges 🖥️, I enjoy turning ideas
-      into practical solutions. As someone who believes in constant learning 📚,
-      I aim to grow with every project I take on and contribute meaningfully to
-      the tech world. 🌐
-     </p>
+  return (
+    <section id="about" className="py-32 md:py-40 relative overflow-hidden bg-green-50/60 border-y border-green-100/50">
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <ScrollReveal>
+          <div className="mb-16">
+            <div className="section-accent"></div>
+            <h2
+              className="font-bold text-black tracking-tight"
+              style={{ fontSize: 'var(--heading-section)' }}
+            >
+              About Me
+            </h2>
+          </div>
+        </ScrollReveal>
 
-     <div>
-      <h3 className="text-xl font-semibold text-gray-800 mb-4">
-       Skills & Technologies
-      </h3>
-      <div className="flex flex-wrap gap-3">
-       {skills.map((skill, index) => (
-        <span
-         key={index}
-         className="px-4 py-2 bg-green-50 rounded-full text-sm text-gray-700"
-        >
-         {skill}
-        </span>
-       ))}
+        <ScrollReveal delay={0.1}>
+          <div className="space-y-8 max-w-3xl">
+            <p className="text-gray-500 text-lg leading-relaxed">
+              Hello! I&apos;m Rigel Ray O. Cabaya, a Fullstack Developer from the
+              University of Science and Technology of the Philippines. I&apos;m
+              passionate about exploring the world of technology, from learning
+              algorithms to building innovative projects that solve real problems.
+            </p>
+
+            <p className="text-gray-500 text-lg leading-relaxed">
+              I&apos;m particularly interested in web development, where I enjoy creating
+              beautiful and functional web experiences. Whether I&apos;m collaborating
+              with people or tackling coding challenges, I enjoy turning ideas
+              into practical solutions. As someone who believes in constant learning,
+              I aim to grow with every project I take on and contribute meaningfully to
+              the tech world.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Social links */}
+        <ScrollReveal delay={0.2}>
+          <div className="flex space-x-5 mt-10">
+            <motion.a
+              href="https://github.com/RigelKukoy"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              className="p-3 rounded-full bg-green-100 text-green-800 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-sm border border-green-200 hover:border-transparent"
+            >
+              <FaGithub
+                size={24}
+                className="transition-colors"
+              />
+            </motion.a>
+            <motion.a
+              href="https://ph.linkedin.com/in/rigel-cabaya-345837367"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              className="p-3 rounded-full bg-green-100 text-green-800 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-sm border border-green-200 hover:border-transparent"
+            >
+              <FaLinkedin
+                size={24}
+                className="transition-colors"
+              />
+            </motion.a>
+            <motion.a
+              href="https://www.facebook.com/rigelray.cabaya"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              className="p-3 rounded-full bg-green-100 text-green-800 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-sm border border-green-200 hover:border-transparent"
+            >
+              <FaFacebook
+                size={24}
+                className="transition-colors"
+              />
+            </motion.a>
+          </div>
+        </ScrollReveal>
       </div>
-     </div>
 
-     <div className="flex space-x-4 mt-6 pt-3">
-      <a
-       href="https://github.com/RigelKukoy"
-       target="_blank"
-       rel="noopener noreferrer"
-      >
-       <FaGithub
-        size={32}
-        className="text-gray-800 hover:text-green-500 transition-colors"
-       />
-      </a>
-      <a
-       href="https://www.facebook.com/rigelray.cabaya"
-       target="_blank"
-       rel="noopener noreferrer"
-      >
-       <FaFacebook
-        size={32}
-        className="text-gray-800 hover:text-green-500 transition-colors"
-       />
-      </a>
-     </div>
-    </div>
-   </div>
-  </section>
- );
+      {/* Skills marquee — full-width infinite scroll */}
+      <ScrollReveal delay={0.3}>
+        <div className="mt-20 md:mt-28">
+          <div className="text-center mb-8">
+            <span className="text-sm font-medium text-gray-400 tracking-widest uppercase">
+              Skills & Technologies
+            </span>
+          </div>
+
+          {/* Marquee container */}
+          <div className="relative overflow-hidden py-6">
+            {/* Fade edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#f5fcf6] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#f5fcf6] to-transparent z-10 pointer-events-none" />
+
+            {/* Scrolling track */}
+            <div className="marquee-track flex w-max">
+              <div className="flex w-max shrink-0">
+                {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
+                  <span
+                    key={`a-${index}`}
+                    className="flex-shrink-0 px-6 py-3 mx-3 text-sm font-medium text-black bg-white rounded-full border border-green-100 shadow-sm hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-default select-none"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              <div className="flex w-max shrink-0" aria-hidden="true">
+                {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
+                  <span
+                    key={`b-${index}`}
+                    className="flex-shrink-0 px-6 py-3 mx-3 text-sm font-medium text-black bg-white rounded-full border border-green-100 shadow-sm hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-default select-none"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
+    </section>
+  );
 }

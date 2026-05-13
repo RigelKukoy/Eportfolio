@@ -2,43 +2,28 @@
 
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
-import { useState, useMemo } from "react";
-import Slider from "react-slick";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-function NextArrow(props) {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 rounded-full bg-green-500/20 hover:bg-green-500/30 transition-colors"
-      aria-label="Next slide"
-    >
-      <IoIosArrowForward className="w-6 h-6 text-green-600" />
-    </button>
-  );
-}
-
-function PrevArrow(props) {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute -left-12 top-1/2 -translate-y-1/2 p-2 rounded-full bg-green-500/20 hover:bg-green-500/30 transition-colors z-10"
-      aria-label="Previous slide"
-    >
-      <IoIosArrowBack className="w-6 h-6 text-green-600" />
-    </button>
-  );
-}
+import { useState } from "react";
+import ScrollReveal from "./ScrollReveal";
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   // Project data array containing all project information
   const projects = [
+    {
+      title: "PrepPulse",
+      description:
+        "PrepPulse is a full-stack preparation and schedule management app built to help users stay on top of exams, meetings, and personal goals. Users can create schedules with tasks, track completion progress automatically calculated via PostgreSQL database triggers, and attach reference links and resources to each schedule. A live real-time countdown timer displays the time remaining to each event down to the second, while a responsive card grid with sorting by date or progress and a soft-delete archive system keeps everything organized.",
+      image: "/images/PrepPulse.png",
+      technologies: [
+        "React",
+        "Tailwind CSS",
+        "Express.js",
+        "PostgreSQL",
+        "Docker",
+      ],
+      ProjectLink: "https://github.com/RigelKukoy/PrepPulse",
+    },
     {
       title:
         "Optimising Square Root Count Sort using Message Passing Interface (MPI)",
@@ -78,56 +63,46 @@ export default function Projects() {
     },
   ];
 
-  const settings = useMemo(
-    () => ({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      arrows: true,
-      nextArrow: <NextArrow />,
-      prevArrow: <PrevArrow />,
-      rtl: false,
-      lazyLoad: "ondemand",
-      swipeToSlide: true,
-      responsive: [
-        {
-          breakpoint: 1280,
-          settings: {
-            slidesToShow: 2,
-          },
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            arrows: false,
-          },
-        },
-      ],
-    }),
-    []
-  );
-
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-12">
-          Featured Projects
-        </h2>
+    <section id="projects" className="py-32 md:py-40 relative">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Cinematic section header */}
+        <ScrollReveal>
+          <div className="max-w-5xl mx-auto text-center mb-20 md:mb-28">
+            <div className="section-accent mx-auto"></div>
+            <h2
+              className="font-bold text-black tracking-tight mt-4"
+              style={{ fontSize: 'var(--heading-section)' }}
+            >
+              Featured Projects
+            </h2>
+            <p className="text-gray-400 text-lg mt-4 max-w-xl mx-auto">
+              A curated selection of work spanning algorithms, interactive storytelling, and AI-powered applications.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="relative">
-          <Slider {...settings}>
-            {projects.map((project, index) => (
-              <div key={index} className="px-2">
+        {/* Massive cinematic cards — single column, 70-80% width */}
+        <div className="space-y-20 md:space-y-28">
+          {projects.map((project, index) => (
+            <ScrollReveal key={index} delay={0.1} direction="up">
+              <div className="group relative max-w-4xl mx-auto z-10">
+                {/* Decorative project index number */}
+                <div 
+                  className="absolute -top-10 -left-4 md:-top-16 md:-left-12 project-index select-none z-20 opacity-80 md:opacity-100 drop-shadow-md pointer-events-none" 
+                  aria-hidden="true"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+
                 <ProjectCard
                   {...project}
+                  index={index}
                   onClick={() => setSelectedProject(project)}
                 />
               </div>
-            ))}
-          </Slider>
+            </ScrollReveal>
+          ))}
         </div>
       </div>
 

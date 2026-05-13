@@ -2,71 +2,337 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════
+   DESIGN SYSTEM — Locked Color Palette
+   ═══════════════════════════════════════════════════════ */
 :root {
- --foreground-rgb: 0, 0, 0;
- --background-start-rgb: 255, 255, 255;
- --background-end-rgb: 244, 250, 244;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 244, 250, 244;
+
+  /* Locked green palette */
+  --green-accent: #22c55e;
+  --green-dark: #16a34a;
+  --green-glow: rgba(34, 197, 94, 0.15);
+  --green-glow-strong: rgba(34, 197, 94, 0.25);
+
+  /* Typography scale */
+  --heading-hero: clamp(2.5rem, 5vw, 4.5rem);
+  --heading-section: clamp(2rem, 4vw, 3.5rem);
+  --heading-card: clamp(1.25rem, 2vw, 1.875rem);
 }
 
 body {
- color: rgb(var(--foreground-rgb));
- background: linear-gradient(
-  to bottom,
-  rgb(var(--background-start-rgb)),
-  rgb(var(--background-end-rgb))
- );
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb)));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Smooth scrolling */
 html {
- scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 /* Custom selection color */
 ::selection {
- background-color: rgb(34, 197, 94);
- color: white;
+  background-color: var(--green-accent);
+  color: white;
 }
 
+/* ═══════════════════════════════════════════════════════
+   CINEMATIC CARD — Hover Physics & Green Glow
+   ═══════════════════════════════════════════════════════ */
+.cinematic-card {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease,
+    background 0.4s ease;
+  will-change: transform, box-shadow;
+  box-shadow:
+    0 10px 40px -10px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.cinematic-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 30px 60px -12px rgba(34, 197, 94, 0.2),
+    0 18px 36px -18px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(34, 197, 94, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Green glow line reveal at card top */
+.cinematic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green-accent), var(--green-dark));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.cinematic-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   GLASS PILL NAVBAR
+   ═══════════════════════════════════════════════════════ */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.glass-pill-scrolled {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(34, 197, 94, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* ═══════════════════════════════════════════════════════
+   INFINITE MARQUEE — Skills Strip
+   ═══════════════════════════════════════════════════════ */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 25s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PROJECT INDEX NUMBERS — Decorative Typography
+   ═══════════════════════════════════════════════════════ */
+.project-index {
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(34, 197, 94, 0.18);
+  user-select: none;
+  pointer-events: none;
+  transition: -webkit-text-stroke-color 0.5s ease;
+}
+
+.cinematic-card:hover~.project-index,
+.group:hover .project-index {
+  -webkit-text-stroke-color: rgba(34, 197, 94, 0.35);
+}
+
+/* ═══════════════════════════════════════════════════════
+   PRESERVED ANIMATIONS — Blob, Float, Glow, Shimmer
+   ═══════════════════════════════════════════════════════ */
+
+/* Blob animation */
 @keyframes blob {
- 0% {
-  transform: translate(0px, 0px) scale(1);
- }
- 33% {
-  transform: translate(30px, -50px) scale(1.1);
- }
- 66% {
-  transform: translate(-20px, 20px) scale(0.9);
- }
- 100% {
-  transform: translate(0px, 0px) scale(1);
- }
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
 }
 
 .animate-blob {
- animation: blob 7s infinite;
+  animation: blob 7s infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animation-delay-2000 {
- animation-delay: 2s;
+  animation-delay: 2s;
 }
 
 .animation-delay-4000 {
- animation-delay: 4s;
+  animation-delay: 4s;
 }
 
+/* Float animation */
 @keyframes float {
- 0% {
-  transform: translateY(0px);
- }
- 50% {
-  transform: translateY(-10px);
- }
- 100% {
-  transform: translateY(0px);
- }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .animate-float {
- animation: float 3s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glow pulse for profile ring */
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(34, 197, 94, 0.3),
+      0 0 20px rgba(34, 197, 94, 0.1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 16px rgba(34, 197, 94, 0.5),
+      0 0 40px rgba(34, 197, 94, 0.2);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Shimmer sweep for pills / buttons */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.hover-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 100%);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hover-shimmer:hover::after {
+  opacity: 1;
+  animation: shimmer 1.2s ease-in-out;
+}
+
+/* Section accent line */
+.section-accent {
+  display: inline-block;
+  width: 48px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  margin-bottom: 1rem;
+}
+
+/* Nav link active indicator */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #22c55e;
+  border-radius: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Card hover glow (legacy — kept for backward compat) */
+.card-glow {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.card-glow:hover {
+  box-shadow:
+    0 8px 30px rgba(34, 197, 94, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Focus underline slide for inputs */
+.input-focus-line {
+  position: relative;
+}
+
+.input-focus-line::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #22c55e;
+  border-radius: 1px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-focus-line:focus-within::after {
+  width: 100%;
 }
