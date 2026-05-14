@@ -1,4 +1,6 @@
-export const BASE_PATH = '/Eportfolio';
+// Empty by default → works on Vercel and `next dev`.
+// GitHub Pages build sets NEXT_PUBLIC_BASE_PATH=/Eportfolio so assets resolve under the project subpath.
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function withBasePath(path) {
   if (!path) return path;

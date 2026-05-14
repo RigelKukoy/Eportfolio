@@ -1,15 +1,8 @@
 'use client';
 
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useAnimation,
-  useReducedMotion,
-} from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
 import { withBasePath } from "../lib/basePath";
 
 export default function ProjectCard({
@@ -24,7 +17,7 @@ export default function ProjectCard({
   const isAlternate = true;
   const prefersReducedMotion = useReducedMotion();
 
-  // Detect mobile to skip expensive 3D scroll transforms
+  // Mobile + reduced-motion users skip the hover lift entirely.
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
@@ -34,32 +27,9 @@ export default function ProjectCard({
     return () => mq.removeEventListener('change', handler);
   }, []);
 
-  // Plain div for scroll tracking — zero transforms here.
-  // perspective on this element creates the 3-D rendering context for
-  // the child's rotateX without causing the circular getBoundingClientRect loop.
-  const scrollRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start end", "end start"],
-  });
-
-  // ── Single spring on raw progress — one MotionValue ticking per frame ──────
-  const springCfg = { stiffness: 90, damping: 26 };
-  const smoothProgress = useSpring(scrollYProgress, springCfg);
-
-  // All transforms derived from the same smoothed value (composite-only).
-  const y       = useTransform(smoothProgress, [0, 0.5, 1], prefersReducedMotion ? [0, 0, 0] : [0, -56, 0]);
-  const rotateX = useTransform(smoothProgress, [0, 0.5, 1], prefersReducedMotion ? [0, 0, 0] : [6, 0, -6]);
-  const scale   = useTransform(smoothProgress, [0, 0.5, 1], prefersReducedMotion ? [1, 1, 1] : [0.93, 1.04, 0.93]);
-
-  // Shadow opacity animates composite-only (opacity on a div, not box-shadow on the card).
-  const shadowRaisedOpacity = useTransform(smoothProgress, [0, 0.5, 1], prefersReducedMotion ? [0, 0, 0] : [0, 1, 0]);
-  const shadowBaseOpacity   = useTransform(smoothProgress, [0, 0.5, 1], prefersReducedMotion ? [1, 1, 1] : [1, 0, 1]);
-
-  // ── Click animation ───────────────────────────────────────────────────────
+  // Click feedback
   const clickControls = useAnimation();
-  const ringControls  = useAnimation();
+  const ringControls = useAnimation();
 
   const handleClick = async () => {
     ringControls.start({
@@ -76,52 +46,44 @@ export default function ProjectCard({
 
   const disableMotion = isMobile || prefersReducedMotion;
 
-  return (
-    // Layer 0 — scroll tracking + 3-D perspective context. NO transforms here.
-    <div
-      ref={scrollRef}
-      className="w-full"
-      style={disableMotion ? {} : { perspective: "1200px", perspectiveOrigin: "50% 50%" }}
-    >
-      {/* Layer 1 — all scroll-driven 3-D transforms live here (desktop only) */}
-      <motion.div
-        style={disableMotion
-          ? { position: "relative" }
-          : { y, rotateX, scale, position: "relative", willChange: "transform" }
-        }
-        className="w-full rounded-[1.5rem]"
-      >
-        {/* Static base shadow — fades out as card rises */}
-        <motion.div
-          className="absolute inset-0 rounded-[1.5rem] pointer-events-none"
-          style={{
-            opacity: shadowBaseOpacity,
-            boxShadow: "0 2px 12px 0px rgba(0,0,0,0.06)",
-          }}
-        />
-        {/* Raised shadow — fades in as card peaks */}
-        <motion.div
-          className="absolute inset-0 rounded-[1.5rem] pointer-events-none"
-          style={{
-            opacity: shadowRaisedOpacity,
-            boxShadow: "0 48px 80px 0px rgba(0,0,0,0.20), 0 20px 48px 0px rgba(34,197,94,0.16)",
-          }}
-        />
+  // Reveal-once on scroll into view — no per-frame scroll listeners.
+  const revealVariants = disableMotion
+    ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
+    : {
+        hidden: { opacity: 0, y: 40 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        },
+      };
 
-        {/* Layer 2 — click interaction + scale punch */}
+  return (
+    <motion.div
+      className="w-full"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={revealVariants}
+    >
+      {/* Hover lift via whileHover — composite-only transform, GPU-cheap */}
+      <motion.div
+        whileHover={disableMotion ? undefined : { y: -8, scale: 1.01 }}
+        transition={{ type: 'spring', stiffness: 220, damping: 22 }}
+        className="w-full rounded-[1.5rem] relative"
+      >
         <motion.div
           animate={clickControls}
           onClick={handleClick}
           className="cursor-pointer w-full relative"
         >
-          {/* Green ring — sibling of cinematic-card so it isn't clipped by overflow:hidden */}
+          {/* Green ring on click — sibling of card so it isn't clipped */}
           <motion.div
             className="absolute inset-0 rounded-[1.5rem] border-2 border-green-400 pointer-events-none z-20"
             initial={{ scale: 1, opacity: 0 }}
             animate={ringControls}
           />
 
-          {/* cinematic-card has no box-shadow; shadow divs on Layer 1 own it */}
           <div className="cinematic-card w-full">
             <div className={`flex flex-col ${isAlternate ? 'md:flex-row-reverse' : ''}`}>
 
@@ -181,6 +143,6 @@ export default function ProjectCard({
           </div>
         </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
