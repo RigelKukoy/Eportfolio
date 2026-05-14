@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { FaGithub, FaFacebook, FaLinkedin } from 'react-icons/fa';
 import ScrollReveal from './ScrollReveal';
 import { motion } from 'framer-motion';
+import { withBasePath } from '../lib/basePath';
 
 export default function About() {
   const skills = [
@@ -126,7 +127,7 @@ export default function About() {
                       className="flex-shrink-0 flex items-center gap-3 px-8 py-4 mx-4 text-base font-semibold text-black bg-white rounded-2xl border border-green-100 shadow-sm hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-default select-none"
                     >
                       <Image
-                        src={skill.logo}
+                        src={withBasePath(skill.logo)}
                         alt={skill.name}
                         width={32}
                         height={32}

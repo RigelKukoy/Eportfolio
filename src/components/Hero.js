@@ -4,6 +4,7 @@ import Image from "next/image";
 import TypeWriter from "./TypeWriter";
 import ScrollReveal from "./ScrollReveal";
 import { motion } from "framer-motion";
+import { withBasePath } from "../lib/basePath";
 
 export default function Hero() {
   return (
@@ -85,7 +86,7 @@ export default function Hero() {
                 <div className="absolute -inset-3 rounded-full border border-green-200/40 animate-glow-pulse" />
                 <div className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-green-500/30 relative">
                   <Image
-                    src="/images/Profile.png"
+                    src={withBasePath("/images/Profile.png")}
                     alt="Rigel Ray O. Cabaya"
                     fill
                     priority

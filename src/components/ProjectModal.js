@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { withBasePath } from "../lib/basePath";
 
 // Animation variants
 const overlayVariants = {
@@ -134,7 +135,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                     variants={contentItem}
                   >
                     <Image
-                      src={project.image}
+                      src={withBasePath(project.image)}
                       alt={project.title}
                       fill
                       sizes="(max-width: 1200px) 100vw, 1200px"

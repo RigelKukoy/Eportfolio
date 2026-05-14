@@ -10,6 +10,7 @@ import {
   useAnimation,
   useReducedMotion,
 } from "framer-motion";
+import { withBasePath } from "../lib/basePath";
 
 export default function ProjectCard({
   title,
@@ -128,7 +129,7 @@ export default function ProjectCard({
               <div className={`relative p-4 md:p-6 lg:p-8 ${isAlternate ? 'md:w-1/2' : 'w-full'}`}>
                 <div className={`relative rounded-2xl overflow-hidden shadow-sm ${isAlternate ? 'aspect-[4/3] md:aspect-auto md:min-h-[360px] md:h-full' : 'aspect-[16/9]'}`}>
                   <Image
-                    src={image}
+                    src={withBasePath(image)}
                     alt={title}
                     fill
                     sizes="(max-width: 768px) 100vw, 896px"
