@@ -60,21 +60,6 @@ export default function Projects() {
       technologies: ["Python", "Ren'Py"],
       ProjectLink: "https://github.com/RigelKukoy/SherlockVsMoriartyVN",
     },
-    {
-      title: "Visual Notes",
-      description:
-        "Visual Notes is a user-friendly app designed to connect busy individuals with trusted taskers for on-demand services like cleaning, shopping, and repairs. Leveraging AI-powered task matching, the platform ensures efficient, secure, and transparent service delivery while fostering trust and professionalism. /n The app addresses the challenges of work-life balance and service accessibility in the Philippines, providing clients with a reliable way to outsource tasks and freelancers with a flexible platform to earn. By bridging the gap between those in need of assistance and those offering their expertise, PagChore supports the growing gig economy, creating a productive ecosystem for all stakeholders.",
-      image: "/images/VisualNotes.png",
-      technologies: [
-        "React",
-        "Next.js",
-        "Tailwind CSS",
-        "Supabase",
-        "OpenAI",
-        "PostgreSQL",
-      ],
-      ProjectLink: "https://github.com/Illamapalooza/visualnote-ai",
-    },
   ];
 
   return (
