@@ -11,6 +11,20 @@ export default function Projects() {
   // Project data array containing all project information
   const projects = [
     {
+      title: "PokeConsultant",
+      description:
+        "PokeConsultant is a dynamic full-stack SPA built with Laravel 12, React, and Inertia.js (with Breeze and Ziggy), seamlessly managing user data persistence and driving server-computed, dynamic UI theming via Inertia props. The backend features a custom 18x18 type-computation algorithm alongside Laravel's parallel HTTP pools with 24-hour caching for concurrent, latency-free external data fetching. Leverages Gemini 2.0 Flash via the AIML API to generate structured JSON strategic recommendations targeting defensive gaps in a player's Pokémon team composition.",
+      image: "/images/PokeConsult.png",
+      technologies: [
+        "Laravel",
+        "React",
+        "Inertia.js",
+        "Tailwind CSS",
+        "AIML API",
+      ],
+      ProjectLink: "https://github.com/RigelKukoy/PokeConsultant",
+    },
+    {
       title: "PrepPulse",
       description:
         "PrepPulse is a full-stack preparation and schedule management app built to help users stay on top of exams, meetings, and personal goals. Users can create schedules with tasks, track completion progress automatically calculated via PostgreSQL database triggers, and attach reference links and resources to each schedule. A live real-time countdown timer displays the time remaining to each event down to the second, while a responsive card grid with sorting by date or progress and a soft-delete archive system keeps everything organized.",

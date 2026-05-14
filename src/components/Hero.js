@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-[60vh] flex items-center justify-center pt-20 pb-8 md:py-16 relative overflow-hidden"
+      className="min-h-[60vh] flex items-center justify-center pt-32 pb-8 md:pt-40 md:pb-16 relative overflow-hidden"
     >
       {/* Background Design Elements */}
       <div className="absolute inset-0 pointer-events-none">

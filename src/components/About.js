@@ -12,6 +12,8 @@ export default function About() {
     'Tailwind CSS',
     'Git',
     'Python',
+    'Laravel',
+    'PHP',
   ];
 
   // Duplicate skills enough times to ensure seamless infinite marquee on ultrawide screens

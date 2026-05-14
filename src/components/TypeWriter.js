@@ -7,7 +7,7 @@ export default function TypeWriter() {
       sequence={[
         "Hi, I'm Rigel Ray O. Cabaya",
         2000,
-        "I'm a Computer Science Student",
+        "I'm a Software Developer",
         1000,
       ]}
       wrapper="span"
