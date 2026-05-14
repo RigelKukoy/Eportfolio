@@ -11,13 +11,13 @@ export default function Hero() {
       id="home"
       className="min-h-[60vh] flex items-center justify-center pt-32 pb-8 md:pt-40 md:pb-16 relative overflow-hidden"
     >
-      {/* Background Design Elements */}
+      {/* Background Design Elements — blur-3xl is GPU-intensive; hidden on mobile */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-40 left-10 w-96 h-96 bg-green-50 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
-        <div className="absolute bottom-40 right-10 w-96 h-96 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-50/30 rounded-full filter blur-3xl"></div>
+        <div className="hidden sm:block absolute top-40 left-10 w-96 h-96 bg-green-50 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
+        <div className="hidden sm:block absolute bottom-40 right-10 w-96 h-96 bg-green-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
+        <div className="hidden sm:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-50/30 rounded-full filter blur-3xl"></div>
 
-        {/* Floating Elements */}
+        {/* Floating Elements — tiny dots, cheap on all devices */}
         <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-green-400/60 rounded-full animate-float"></div>
         <div className="absolute top-3/4 right-1/4 w-2 h-2 bg-green-300/60 rounded-full animate-float animation-delay-2000"></div>
         <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-green-200/60 rounded-full animate-float animation-delay-4000"></div>

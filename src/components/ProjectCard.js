@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -22,6 +22,16 @@ export default function ProjectCard({
 }) {
   const isAlternate = true;
   const prefersReducedMotion = useReducedMotion();
+
+  // Detect mobile to skip expensive 3D scroll transforms
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   // Plain div for scroll tracking — zero transforms here.
   // perspective on this element creates the 3-D rendering context for
@@ -63,16 +73,21 @@ export default function ProjectCard({
     onClick?.();
   };
 
+  const disableMotion = isMobile || prefersReducedMotion;
+
   return (
     // Layer 0 — scroll tracking + 3-D perspective context. NO transforms here.
     <div
       ref={scrollRef}
       className="w-full"
-      style={{ perspective: "1200px", perspectiveOrigin: "50% 50%" }}
+      style={disableMotion ? {} : { perspective: "1200px", perspectiveOrigin: "50% 50%" }}
     >
-      {/* Layer 1 — all scroll-driven 3-D transforms live here */}
+      {/* Layer 1 — all scroll-driven 3-D transforms live here (desktop only) */}
       <motion.div
-        style={{ y, rotateX, scale, position: "relative" }}
+        style={disableMotion
+          ? { position: "relative" }
+          : { y, rotateX, scale, position: "relative", willChange: "transform" }
+        }
         className="w-full rounded-[1.5rem]"
       >
         {/* Static base shadow — fades out as card rises */}

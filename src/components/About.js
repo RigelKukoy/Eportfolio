@@ -120,7 +120,7 @@ export default function About() {
             <div className="marquee-track flex w-max">
               {[0, 1].map((copy) => (
                 <div key={copy} className="flex w-max shrink-0" aria-hidden={copy === 1}>
-                  {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
+                  {[...skills, ...skills].map((skill, index) => (
                     <span
                       key={`${copy}-${index}`}
                       className="flex-shrink-0 flex items-center gap-3 px-8 py-4 mx-4 text-base font-semibold text-black bg-white rounded-2xl border border-green-100 shadow-sm hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-default select-none"

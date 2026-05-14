@@ -59,10 +59,9 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       className="fixed top-0 inset-x-0 z-50 sm:top-4 pointer-events-none flex justify-center"
     >
-      <motion.div
-        layout
+      <div
         className={`pointer-events-auto w-full sm:w-auto sm:max-w-2xl overflow-hidden transition-colors duration-500 rounded-none sm:rounded-full ${
-          scrolled || isOpen ? 'bg-white/95 backdrop-blur-xl shadow-md sm:glass-pill-scrolled sm:shadow-lg sm:shadow-black/5' : 'bg-white/70 backdrop-blur-md sm:glass-pill sm:shadow-sm'
+          scrolled || isOpen ? 'bg-white/95 shadow-md sm:glass-pill-scrolled sm:shadow-lg sm:shadow-black/5' : 'bg-white/70 sm:glass-pill sm:shadow-sm'
         }`}
       >
         {/* Mobile Header (Only visible on small screens) */}
@@ -145,7 +144,7 @@ export default function Navbar() {
             );
           })}
         </div>
-      </motion.div>
+      </div>
     </motion.nav>
   );
 }

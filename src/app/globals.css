@@ -29,6 +29,12 @@ body {
       rgb(var(--background-end-rgb)));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: contain;
+}
+
+/* Remove 300ms tap delay on touch devices */
+button, a, [role="button"] {
+  touch-action: manipulation;
 }
 
 /* Smooth scrolling */
@@ -94,7 +100,7 @@ html {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 50s linear infinite;
+  animation: marquee-scroll 25s linear infinite;
   will-change: transform;
 }
 
@@ -171,6 +177,8 @@ html {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Glow pulse for profile ring */
@@ -272,6 +280,32 @@ html {
   box-shadow:
     0 8px 30px rgba(34, 197, 94, 0.12),
     0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE PERFORMANCE — Disable expensive GPU effects
+   ═══════════════════════════════════════════════════════ */
+
+/* backdrop-filter blur is very expensive on mobile GPUs */
+@media (max-width: 767px) {
+  .cinematic-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.97);
+  }
+}
+
+/* Respect system reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-float,
+  .animate-glow-pulse {
+    animation: none;
+    will-change: auto;
+  }
+  .marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 /* Focus underline slide for inputs */

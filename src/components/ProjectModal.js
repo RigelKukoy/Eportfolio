@@ -78,7 +78,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
         >
           {/* Backdrop */}
           <motion.div
-            className="absolute inset-0 bg-black/60 backdrop-blur-md"
+            className="absolute inset-0 bg-black/60 sm:backdrop-blur-sm"
             variants={overlayVariants}
             onClick={onClose}
           />
