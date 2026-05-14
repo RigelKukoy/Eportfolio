@@ -6,23 +6,28 @@ import { motion, AnimatePresence } from "framer-motion";
 // Animation variants
 const overlayVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.2 } },
+  exit: { opacity: 0, transition: { duration: 0.25 } },
 };
 
 const modalVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.97 },
+  hidden: { opacity: 0, y: 60, scale: 0.84 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
+    transition: {
+      type: "spring",
+      stiffness: 290,
+      damping: 24,
+      mass: 0.85,
+    },
   },
   exit: {
     opacity: 0,
-    y: 20,
-    scale: 0.97,
-    transition: { duration: 0.2, ease: 'easeIn' },
+    y: 24,
+    scale: 0.93,
+    transition: { duration: 0.22, ease: 'easeIn' },
   },
 };
 

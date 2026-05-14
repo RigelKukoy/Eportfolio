@@ -2,8 +2,8 @@
 
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
-import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
+import { useState } from "react";
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -84,23 +84,21 @@ export default function Projects() {
         {/* Massive cinematic cards — single column, 70-80% width */}
         <div className="space-y-20 md:space-y-28">
           {projects.map((project, index) => (
-            <ScrollReveal key={index} delay={0.1} direction="up">
-              <div className="group relative max-w-4xl mx-auto z-10">
-                {/* Decorative project index number */}
-                <div 
-                  className="absolute -top-10 -left-4 md:-top-16 md:-left-12 project-index select-none z-20 opacity-80 md:opacity-100 drop-shadow-md pointer-events-none" 
-                  aria-hidden="true"
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-
-                <ProjectCard
-                  {...project}
-                  index={index}
-                  onClick={() => setSelectedProject(project)}
-                />
+            <div key={index} className="relative max-w-4xl mx-auto z-10">
+              {/* Decorative project index number */}
+              <div
+                className="absolute -top-10 -left-4 md:-top-16 md:-left-12 project-index select-none z-20 opacity-80 md:opacity-100 drop-shadow-md pointer-events-none"
+                aria-hidden="true"
+              >
+                {String(index + 1).padStart(2, '0')}
               </div>
-            </ScrollReveal>
+
+              <ProjectCard
+                {...project}
+                index={index}
+                onClick={() => setSelectedProject(project)}
+              />
+            </div>
           ))}
         </div>
       </div>

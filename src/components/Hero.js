@@ -39,24 +39,36 @@ export default function Hero() {
                   className="font-bold text-black leading-[1.1] tracking-tight"
                   style={{ fontSize: 'var(--heading-hero)' }}
                 >
-                  <TypeWriter />
+                  {/* Static first line — never reflows, no width/height shift */}
+                  <span className="block">Hi, I&apos;m</span>
+                  {/* white-space:nowrap locks to 1 line; no overflow:hidden so descenders (g, y, p) aren't clipped */}
+                  <span
+                    className="block"
+                    style={{
+                      whiteSpace: 'nowrap',
+                      minHeight: '1.15em',
+                      fontSize: 'clamp(1.75rem, 4vw, 3rem)',
+                    }}
+                  >
+                    <TypeWriter />
+                  </span>
                 </h1>
               </div>
               <p className="text-lg md:text-xl text-gray-500 max-w-lg leading-relaxed">
                 Fullstack Developer passionate about creating beautiful and
                 functional web experiences
               </p>
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-2">
                 <motion.a
                   href="#contact"
-                  className="px-8 py-3.5 bg-green-500 text-white rounded-full font-medium hover:bg-green-600 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20 hover-shimmer"
+                  className="w-full sm:w-auto text-center px-8 py-3.5 bg-green-500 text-white rounded-full font-medium hover:bg-green-600 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20 hover-shimmer"
                   whileTap={{ scale: 0.97 }}
                 >
                   Contact Me
                 </motion.a>
                 <motion.a
                   href="#projects"
-                  className="px-8 py-3.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg"
+                  className="w-full sm:w-auto text-center px-8 py-3.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg"
                   whileTap={{ scale: 0.97 }}
                 >
                   View Projects
