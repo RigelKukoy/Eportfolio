@@ -60,12 +60,15 @@ export default function ProjectCard({
 
   return (
     <motion.div
-      className="w-full"
+      className="cinematic-card-wrap w-full relative"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={revealVariants}
     >
+      {/* Ambient green halo — sits BEHIND the card, bleeds onto page bg */}
+      <div className="cinematic-card-halo" aria-hidden="true" />
+
       {/* Hover lift via whileHover — composite-only transform, GPU-cheap */}
       <motion.div
         whileHover={disableMotion ? undefined : { y: -8, scale: 1.01 }}
