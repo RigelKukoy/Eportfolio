@@ -1,26 +1,24 @@
 'use client';
 
+import Image from 'next/image';
 import { FaGithub, FaFacebook, FaLinkedin } from 'react-icons/fa';
 import ScrollReveal from './ScrollReveal';
 import { motion } from 'framer-motion';
 
 export default function About() {
   const skills = [
-    'JavaScript (ES6+)',
-    'React.js',
-    'Next.js',
-    'Tailwind CSS',
-    'Git',
-    'Python',
-    'Laravel',
-    'PHP',
+    { name: 'JavaScript',  logo: '/images/tech/js.svg' },
+    { name: 'React.js',    logo: '/images/tech/react.svg' },
+    { name: 'Next.js',     logo: '/images/tech/nextjs.svg' },
+    { name: 'Tailwind CSS', logo: '/images/tech/tailwind.svg' },
+    { name: 'Git',         logo: '/images/tech/git.svg' },
+    { name: 'Python',      logo: '/images/tech/python.svg' },
+    { name: 'Laravel',     logo: '/images/tech/laravel.svg' },
+    { name: 'PHP',         logo: '/images/tech/php.svg' },
   ];
 
-  // Duplicate skills enough times to ensure seamless infinite marquee on ultrawide screens
-  const marqueeSkills = [...skills, ...skills, ...skills, ...skills];
-
   return (
-    <section id="about" className="py-32 md:py-40 relative overflow-hidden bg-green-50/60 border-y border-green-100/50">
+    <section id="about" className="pt-16 pb-10 md:pt-20 md:pb-12 relative overflow-hidden bg-green-50/60 border-y border-green-100/50">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <ScrollReveal>
           <div className="mb-16">
@@ -120,26 +118,26 @@ export default function About() {
 
             {/* Scrolling track */}
             <div className="marquee-track flex w-max">
-              <div className="flex w-max shrink-0">
-                {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
-                  <span
-                    key={`a-${index}`}
-                    className="flex-shrink-0 px-6 py-3 mx-3 text-sm font-medium text-black bg-white rounded-full border border-green-100 shadow-sm hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-default select-none"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-              <div className="flex w-max shrink-0" aria-hidden="true">
-                {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
-                  <span
-                    key={`b-${index}`}
-                    className="flex-shrink-0 px-6 py-3 mx-3 text-sm font-medium text-black bg-white rounded-full border border-green-100 shadow-sm hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-default select-none"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex w-max shrink-0" aria-hidden={copy === 1}>
+                  {[...skills, ...skills, ...skills, ...skills].map((skill, index) => (
+                    <span
+                      key={`${copy}-${index}`}
+                      className="flex-shrink-0 flex items-center gap-3 px-8 py-4 mx-4 text-base font-semibold text-black bg-white rounded-2xl border border-green-100 shadow-sm hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-default select-none"
+                    >
+                      <Image
+                        src={skill.logo}
+                        alt={skill.name}
+                        width={32}
+                        height={32}
+                        className="object-contain"
+                        unoptimized
+                      />
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
